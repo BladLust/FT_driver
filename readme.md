@@ -103,10 +103,49 @@ Read Position:
 - 参考原项目的教程 https://github.com/RGMC-XL-team/inhand_reorientation 
 - 请严格安装除了Dynamixel SDK以外的所有软件和依赖项
 - 新建workspace，在src中克隆两个项目的源码：https://github.com/RGMC-XL-team/inhand_reorientation    https://github.com/Rice-RobotPI-Lab/RGMC_In-Hand_Manipulation_2024
-- 在src/inhand_reorientation/leap_hardware/路径下
-
+- 在~leap_hardware/src/leap_hardware路径下添加文件（夹）scservo_sdk、sms_sts、FT_client.py
+- 在~leap_hardware/scripts下将原leaphand_node.py替换为我们提供的leapnode_FT.py
+- 同时修改~leap_hardware下的CMakeLists.txt，按上一步骤修改leapnode节点文件名，确保编译通过
 ```shell
-
+cd path-to-your-workspace/
+catkin_make_isolated
 ```
 
+####  参数调整和整体准备
 
+**注意：该步骤需要我们熟悉项目结构，对参数文件和launch文件进行修改
+
+- 在~leap_hardware/launch/下修改system.launch文件，参数设置除"free_move"外均为true；设置同路径single_camera.launch中参数“camera_0_serial_no“为你的相机序列号
+- 将灵巧手固定在机架（由铝材搭接而成）上，操作平面打印件可以用魔术贴贴在掌心，确保凹槽对齐，固定相机于手掌正上方约40cm处，确保相机垂直投影于操作平面
+- 打印方块（已提供cube_s.stl文件），按照教程：https://github.com/Rice-RobotPI-Lab/RGMC_In-Hand_Manipulation_2024
+          按要求打印二维码并粘贴到方块中,可供参考的二维码下载地址：https://chev.me/arucogen/
+- 请自行进行相机标定，然后将标定结果写入~leap_hardware/config/rgmc_d405_calib.yaml中
+- 方块A面朝上，置于操作平面正中心
+- 保证舵机通信、控制正常，接线合理，供电达标
+  
+####  运行程序
+
+第一个终端进行通讯，展示可视化界面
+```shell
+conda deactivate 
+cd path-to-your-workspace/
+source devel_isolated/setup.bash
+roslaunch leap_hardware system.launch 
+```
+此时灵巧手将调整为初状态，rviz界面中若观察到cube坐标系x-y轴、操作平面凹陷处、掌心缺口处“三处虎口对齐”，cube坐标系的零点在Z方向略高于操作平面，则相机标定结果合理；若误差较大可适当调整~leap_hardware/config/rgmc_d405_calib.yaml中相机参数。
+
+第二个终端跑RL模型
+```shell
+conda activate rlgpu
+cd ~leap_sim/leapsim/hardware
+python ./agent_hw.py
+```
+若提示：Software is initialized successfully!   Hardware is initialized successfully! 则说明模型载入完成
+
+第三个终端跑上位机决策
+```shell
+conda activate rlgpu
+cd ~leap_task_B/scripts
+python ./taskB_highlevel.py
+```
+运行后，开始跑taskB，即按照ABCDEFEDCBA的循环顺序将手内方块连续翻转十几轮后停止
