@@ -97,8 +97,6 @@ Read Position:
 
 ## 手内方块翻转项目移植与运行  
 
-fork from https://github.com/RGMC-XL-team/inhand_reorientation
-
 ####  环境安装
 
 **注意：为方便移植，本项目ROS1中使用的是python3.8
