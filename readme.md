@@ -122,7 +122,10 @@ catkin_make_isolated
 - 请自行进行相机标定，然后将标定结果写入~leap_hardware/config/rgmc_d405_calib.yaml中
 - 方块A面朝上，置于操作平面正中心
 - 保证舵机通信、控制正常，接线合理，供电达标
-  
+
+![all](./readmeSrc/all.jpg)
+
+
 ####  运行程序
 
 第一个终端进行通讯，展示可视化界面
