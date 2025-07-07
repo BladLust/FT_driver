@@ -104,7 +104,8 @@ fork from https://github.com/RGMC-XL-team/inhand_reorientation
 ####  环境安装
 
 **注意：为方便移植，本项目ROS1中使用的是python3.8
-- 按照原项目的教程https://github.com/RGMC-XL-team/inhand_reorientation，请严格安装除了Dynamixel SDK以外的所有软件和依赖项
+- 参考原项目的教程 https://github.com/RGMC-XL-team/inhand_reorientation 
+- 请严格安装除了Dynamixel SDK以外的所有软件和依赖项
 - 新建workspace，在src中克隆https://github.com/RGMC-XL-team/inhand_reorientation和https://github.com/Rice-RobotPI-Lab/RGMC_In-Hand_Manipulation_2024两个项目的源码
 - 在src/inhand_reorientation/leap_hardware/路径下
 
