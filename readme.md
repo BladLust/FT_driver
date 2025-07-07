@@ -1,8 +1,6 @@
 ## 硬件准备及安装
 
-由于使用的FT电机与Leap Hand原装XC330电机尺寸、转轴、固定孔位置**完全相同**，仅有控制线插口位置不同，我们可以大致使用
-
-[原版LeapHand组装教程]: https://v1.leaphand.com/assembly
+由于使用的FT电机与Leap Hand原装XC330电机尺寸、转轴、固定孔位置**完全相同**，仅有控制线插口位置不同，我们可以大致使用教程https://v1.leaphand.com/assembly
 
 进行灵巧手硬件的安装。但正由于其控制线插口位置不同，我们需要对部分XC330配套的结构件进行调整并以3D打印的方式制作，我们需要替换其中由Dynamixel提供的电机支撑件。具体地，将所需的11个H101，10个S101以及6个S102使用本项目中`STLSubstitute`文件夹中对应的模型替换（由于它们足够相似，仿真中可以不用替换）。其中S101有两个版本，分别是需要8片的普通版和2片的Slim版。Slim版用于侧面不能突出的大拇指第二关节部分。
 
@@ -106,7 +104,7 @@ fork from https://github.com/RGMC-XL-team/inhand_reorientation
 **注意：为方便移植，本项目ROS1中使用的是python3.8
 - 参考原项目的教程 https://github.com/RGMC-XL-team/inhand_reorientation 
 - 请严格安装除了Dynamixel SDK以外的所有软件和依赖项
-- 新建workspace，在src中克隆https://github.com/RGMC-XL-team/inhand_reorientation和https://github.com/Rice-RobotPI-Lab/RGMC_In-Hand_Manipulation_2024两个项目的源码
+- 新建workspace，在src中克隆两个项目的源码：https://github.com/RGMC-XL-team/inhand_reorientation    https://github.com/Rice-RobotPI-Lab/RGMC_In-Hand_Manipulation_2024
 - 在src/inhand_reorientation/leap_hardware/路径下
 
 ```shell
